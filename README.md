@@ -385,6 +385,8 @@ Le projet actuellement contient de nombreuses faiblesses qui vont être remédi�
 
 * Approfondissement de la partie Equité algorithmique avec l'arrivé de Fairlearn et de différents graphiques, un ré entrainement du modèle avec un nouveau poids associé à chaque variable si modèle injuste et réévaluation du modèle.
 
+* Amélioration des modèles déja existants (optimisation des hyperparamètres)
+
 ## Sources
 [1] [Guide NumPy](https://pandas.pydata.org/docs/user_guide/index.html)
 
