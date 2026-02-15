@@ -295,28 +295,41 @@ Cette étape consiste à estimer le coût moyen par sinistre. Afin de donner plu
 
 ##  Résultats & Performance
 
+### Choix du modèle
+
+Regardons nos résultats pour nos modèles de Fréquence: 
+
+![graphique modèle freq](https://github.com/user-attachments/assets/02778729-e0d8-498d-9671-c5904e6a3c04)
+
+La déviance de Poisson a été retenue comme métrique de référence pour départager nos modèles , l'objectif étant de minimiser cette valeur. Le modèle XGBoost ayant obtenu le score le plus bas (0,300225), c’est sur celui-ci que nous baserons nos analyses et nos résultats finaux.
+
+
+![graphique modèle sev](https://github.com/user-attachments/assets/dcdee7d0-37ab-4fc0-b61d-2f6910a12d4f)
+
+Afin d’identifier le modèle le plus performant, nous avons privilégié cette foois-ci la déviance Gamma, l'objectif étant toujours de minimiser cette valeur. Le modèle XGBoost a obtenu le score le plus bas (1,060572). Nous nous baserons donc encore sur ce modèle pour nos analyses et résultats finaux.
+
 ### Performance technique
 Le recalibrage sur données cappées permet de valider la performance prédictive du modèle sur les sinistres courants. Il prouve que la segmentation est robuste et que le modèle a correctement appris le comportement moyen du risque sans être pollué par le bruit des événements extrêmes.
 
-![Gini cappé](https://github.com/user-attachments/assets/e7df1860-da0a-41b7-bb66-8e6b75b2ea69)
+![Gini cappé](https://github.com/user-attachments/assets/7d2ceb0c-061b-461c-853d-08ee606e65aa)
 
 Regardons désormais le Lift Chart pour avoir un aperçu de la manière dont notre modèle trie les risques:
 
-![Lift chart cappé](https://github.com/user-attachments/assets/26cfc6bf-c4eb-4885-8ce6-e8fca4326ae1)
+![Lift chart cappé](https://github.com/user-attachments/assets/e727d301-3d3b-4c1f-9acc-a9c62a419a4d)
 
 Ce graphique est l'outil de validation final de notre modèle. Il compare la prime pure prédite par le modèle combiné (Fréquence $\times$ Sévérité) à la prime pure réelle, calculée sur des montants de sinistres écrêtés au 99,5ème percentile.
 
-On observe que notre modèle estime bien les différents déciles, ce qui nous confirme que notre modèle est bien calibré, pour 80 % de la population (déciles 0 à 7), l'erreur de tarification est très basse. La monotonie des deux courbes confirme également un fort pouvoir de segmentation, validé par un coefficient de Gini de 0.233. Ce qui nous confirme que notre modèle hiérarchise les assurés avec une bonne précision.
+On observe que notre modèle estime bien les différents déciles, ce qui nous confirme que notre modèle est bien calibré, pour 80 % de la population (déciles 0 à 7), l'erreur de tarification est très basse. La quasi-monotonie des deux courbes confirme également un fort pouvoir de segmentation, validé par un coefficient de Gini de 0.248. Ce qui nous confirme que notre modèle hiérarchise les assurés avec une bonne précision
 
 ### Validation business
 Le coefficient de Gini permet d'évaluer le pouvoir discriminant du modèle, soit sa capacité à hiérarchiser les assurés selon leur niveau de risque. Analysons ses résultats après l'étape de recalibrage sur cette fois-ci les sinistres n'ayant subi aucun plafonnement :
-![Gini non cappé](https://github.com/user-attachments/assets/1fc6fe70-dd43-4fe7-84ed-5448db986b03)
+![Gini non cappé](https://github.com/user-attachments/assets/aec379d0-617c-4941-a465-5758a190c506)
 
 Regardons désormais le Lift Chart associé pour obtenir un meilleur aperçu de la gestion des risques de notre modèle :
 
-![Lift chart non cappé](https://github.com/user-attachments/assets/456687f0-06fb-48b7-9bba-fd978abbf651)
+![Lift chart non cappé](https://github.com/user-attachments/assets/106789d4-bcd9-442a-b4b9-6b4e4acd49e3)
 
-Le point le plus frappant est la non-monotonie sévère du coût réel, particulièrement visible entre les déciles 1, 2, 3 et 4.
+Le point le plus frappant est la non-monotonie sévère du coût réel, particulièrement visible entre les déciles 4 premiers déciles.
 
 -   **Constat :** On observe que le coût réel du décile 2 est bien plus élevé que celui des déciles 3 et 4, alors que le modèle prédit l'inverse.
     
