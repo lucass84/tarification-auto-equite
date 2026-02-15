@@ -38,7 +38,7 @@ Pour comprendre le jeu de données , regardons nos différentes variables et ce 
 
 ![Liste_var](https://github.com/user-attachments/assets/c6b61ff3-ad38-41eb-91f7-a60555642451)
 
-** Précision sur le dataset :**
+**Précision sur le dataset :**
 * Les données que nous analyserons représentent une année d'assurance française. 
 * Ce dataset présente 676 780 lignes dans la partie fréquence et 36 639 lignes dans la partie sévérité.
 * Les données du dataset sont anonymisées mais proviennent de réelles polices d'assurance du marché français, ce qui permet de confronter les modèles à la complexité concrète du risque.
