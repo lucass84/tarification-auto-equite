@@ -303,6 +303,8 @@ Regardons nos résultats pour nos modèles de Fréquence:
 
 La déviance de Poisson a été retenue comme métrique de référence pour départager nos modèles , l'objectif étant de minimiser cette valeur. Le modèle XGBoost ayant obtenu le score le plus bas (0,300225), c’est sur celui-ci que nous baserons nos analyses et nos résultats finaux.
 
+Regardons désormais nos résultats sur nos modèles de sévérité.
+
 
 ![graphique modèle sev](https://github.com/user-attachments/assets/dcdee7d0-37ab-4fc0-b61d-2f6910a12d4f)
 
